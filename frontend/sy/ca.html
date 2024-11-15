@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Architecture</title>
+    <link rel="stylesheet" href="cn.css" />
+
+    <!-- Internal CSS for OS Page -->
+    <style>
+        /* Reset styles to avoid affecting global styles */
+        body, h1, h2, h3, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Scoped styles */
+        .os-page {
+            font-family: "Poppins", sans-serif;
+            background-color: #f4f4f9;
+            padding: 80px 20px; /* Adjust padding for centering */
+            text-align: center; /* Center align text */
+        }
+
+        /* Navbar styling */
+        .os-page .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 30px;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .os-page .navbar .logo {
+            font-size: 22px;
+            font-weight: 500;
+            color: #4070f4;
+            display: flex;
+            align-items: center;
+            column-gap: 10px;
+        }
+
+        .os-page .navbar .profile {
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+        }
+
+        /* Main content */
+        .os-page #main-content {
+            padding: 40px;
+            background-color: #3057c5;
+            border-radius: 10px; /* Added for visual appeal */
+            display: inline-block; /* Center block */
+            margin-top: 80px; /* Space below navbar */
+            max-width: 90%; /* Set maximum width to occupy most of the page */
+            width: 100%; /* Allow full width */
+        }
+
+        .os-page #main-content h2 {
+            font-size: 32px;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        /* PDF management functionality section */
+        .os-page .pdf-management {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .os-page .pdf-management h3 {
+            font-size: 24px;
+            color: #333333;
+            margin-bottom: 15px;
+        }
+
+        .os-page .pdf-management input[type="text"],
+        .os-page .pdf-management button {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #dddddd;
+            font-size: 16px;
+        }
+
+        .os-page .pdf-management button {
+            background-color: #4070f4;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .os-page .pdf-management button:hover {
+            background-color: #3057c5;
+        }
+
+        /* Custom File Input Button */
+        .os-page .custom-file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4070f4;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .os-page .custom-file-upload:hover {
+            background-color: #3057c5;
+        }
+
+        /* Hide the default file input */
+        .os-page input[type="file"] {
+            display: none;
+        }
+
+        /* PDF list styling */
+        .os-page .pdf-list {
+            margin-top: 20px;
+        }
+
+        .os-page .pdf-item {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .os-page .pdf-item a {
+            color: #4070f4;
+            text-decoration: none;
+        }
+
+        .os-page .pdf-item button {
+            background-color: #ff4d4d;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .os-page .pdf-item button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="os-page">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo_item">
+                <i class="bx bx-menu" id="sidebarOpen"></i> NotesBuzz
+            </div>
+            <div class="search_bar">
+                <input type="text" placeholder="Search" />
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div id="main-content">
+            <h2>Computer Architecture</h2>
+
+            <!-- PDF Management Section -->
+            <div class="pdf-management">
+                <h3>Add a File from Your Computer</h3>
+
+                <!-- Custom File Upload Button -->
+                <label class="custom-file-upload">
+                    <input type="file" id="fileUpload" accept="application/pdf,
+                    application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                    application/msword,
+                    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+                    application/vnd.ms-excel,
+                    application/vnd.openxmlformats-officedocument.presentationml.presentation,
+                    application/vnd.ms-powerpoint,
+                    text/plain,
+                    application/rtf,
+                    text/csv,
+                    image/jpeg,
+                    image/png,
+                    image/gif,
+                    image/bmp,
+                    image/tiff,
+                    image/svg+xml,
+                    image/webp,
+                    video/mp4,
+                    video/x-msvideo,
+                    video/webm,
+                    video/mpeg,
+                    video/quicktime,
+                    audio/mpeg,
+                    audio/wav,
+                    audio/ogg,
+                    audio/midi,
+                    application/zip,
+                    application/vnd.rar,
+                    application/x-7z-compressed,
+                    application/gzip,
+                    application/json,
+                    application/xml,
+                    text/html,
+                    text/css">
+                    Choose File
+                </label>
+
+                <input type="hidden" id="subject" value="cao">
+
+                <!-- Display the selected file name -->
+                <div id="file-name">No file chosen</div>
+
+                <!-- Add File button -->
+                <button type="button" id="addFileBtn">Add File</button>
+
+                <!-- File List -->
+                <div class="pdf-list" id="pdfList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Display the chosen file name
+        const fileInput = document.getElementById('fileUpload');
+        const fileNameDisplay = document.getElementById('file-name');
+        const addFileBtn = document.getElementById('addFileBtn');
+        const pdfList = document.getElementById('pdfList');
+
+        fileInput.addEventListener('change', function() {
+            const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'No file chosen';
+            fileNameDisplay.textContent = fileName;
+        });
+
+        // Function to fetch files and display them
+        async function fetchFiles() {
+            const subject = document.getElementById('subject').value; // Get the subject value
+            const response = await fetch(`http://localhost:5000/files?subject=${subject}`);
+            const files = await response.json();
+            if (Array.isArray(files) && files.length > 0) {
+                displayFiles(files);
+            } else {
+                pdfList.innerHTML = '<div>No files found</div>';
+            }
+        }
+
+        // Function to display files on the screen
+        function displayFiles(files) {
+            pdfList.innerHTML = ''; // Clear the list before displaying
+            files.forEach(file => {
+                const pdfItem = document.createElement('div');
+                pdfItem.classList.add('pdf-item');
+                pdfItem.innerHTML = `
+                    <a href="http://localhost:5000/file/${file._id}" download>${file.filename}</a>
+                    <button onclick="deleteFile('${file._id}')">Delete</button>
+                `;
+                pdfList.appendChild(pdfItem);
+            });
+        }
+
+        // Function to delete a file
+        async function deleteFile(fileId) {
+            const response = await fetch(`http://localhost:5000/delete/${fileId}`, {
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                fetchFiles(); // Refresh the file list
+            } else {
+                alert('Failed to delete the file.');
+            }
+        }
+
+        // Add event listener to the Add File button
+        addFileBtn.addEventListener('click', async function() {
+            const file = fileInput.files[0];
+            const subject = document.getElementById('subject').value; // Get the subject value
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('subject', subject);
+
+                const response = await fetch('http://localhost:5000/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    fetchFiles(); // Refresh the file list
+                    fileInput.value = ''; // Reset the file input
+                    fileNameDisplay.textContent = 'No file chosen'; // Reset the file name display
+                } else {
+                    alert('Failed to upload the file.');
+                }
+            } else {
+                alert('Please choose a file to upload.');
+            }
+        });
+
+        // Fetch and display files when the page loads
+        window.onload = fetchFiles;
+
+    // Existing code ...
+
+    // Add event listener to the search bar
+    const searchInput = document.querySelector('.search_bar input');
+
+    searchInput.addEventListener('input', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        filterFiles(searchTerm);
+    });
+
+    // Function to filter files based on the search term
+    function filterFiles(searchTerm) {
+        const allFiles = Array.from(pdfList.children); // Get all file items
+        allFiles.forEach(fileItem => {
+            const fileName = fileItem.querySelector('a').textContent.toLowerCase();
+            // Show or hide the file item based on the search term
+            if (fileName.includes(searchTerm)) {
+                fileItem.style.display = '';
+            } else {
+                fileItem.style.display = 'none';
+            }
+        });
+    }
+
+    
+
+    </script>
+</body>
+</html>

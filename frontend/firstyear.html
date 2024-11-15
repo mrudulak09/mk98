@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subjects</title>
+    <!-- Boxicons CDN -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="firstyear.css" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo_item">
+            <i class="bx bx-menu" id="sidebarOpen"></i>
+            NotesBuzz
+        </div>
+        <div class="search_bar">
+            <input type="text" id="searchInput" placeholder="Search" />
+        </div>
+        <div class="navbar_content">
+            <i class="bi bi-grid"></i>
+            <i class="bx bx-sun" id="darkLight"></i>
+            <i class="bx bx-bell"></i>
+            <img src="img/woman.png" alt="" class="profile" />
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="menu_content">
+            <ul class="menu_items">
+                <li class="item">
+                    <a href="home.html" class="nav_link submenu_item" id="homeLink">
+                        <span class="navlink_icon">
+                            <i class="bx bx-home-alt"></i>
+                        </span>
+                        <span class="navlink">Home</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="overview.html" class="nav_link submenu_item">
+                        <span class="navlink_icon">
+                            <i class="bx bx-grid-alt"></i>
+                        </span>
+                        <span class="navlink">Overview</span>
+                    </a>
+                </li>
+
+               <!-- Subjects Dropdown -->
+            <li class="item">
+                <div class="nav_link submenu_item" id="subjectsLink">
+                    <span class="navlink_icon">
+                        <i class="bx bx-layer"></i>
+                    </span>
+                    <span class="navlink">Subjects</span>
+                    <i class="bx bx-chevron-down arrow-down"></i>
+                </div>
+                <ul class="dropdown" id="subjectsDropdown">
+                    <li>
+                        <a href="firstyear.html" class="nav_link submenu_item">
+                            <span class="navlink_icon">
+                                <i class="bx bx-layer"></i>
+                            </span>
+                            <span class="navlink">First Year</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="secondyear.html" class="nav_link submenu_item">
+                            <span class="navlink_icon">
+                                <i class="bx bx-layer"></i>
+                            </span>
+                            <span class="navlink">Second Year</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="thirdyear.html" class="nav_link submenu_item">
+                            <span class="navlink_icon">
+                                <i class="bx bx-layer"></i>
+                            </span>
+                            <span class="navlink">Third Year</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="fourthyear.html" class="nav_link submenu_item">
+                            <span class="navlink_icon">
+                                <i class="bx bx-layer"></i>
+                            </span>
+                            <span class="navlink">Fourth Year</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+            <ul class="menu_items">
+                <li class="item">
+                    <a href="profile.html" class="nav_link">
+                        <span class="navlink_icon">
+                            <i class="bx bxs-magic-wand"></i>
+                        </span>
+                        <span class="navlink">Profile</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="setting.html" class="nav_link">
+                        <span class="navlink_icon">
+                            <i class="bx bx-cog"></i>
+                        </span>
+                        <span class="navlink">Setting</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="logout.html" class="nav_link">
+                        <span class="navlink_icon">
+                            <i class="bx bx-log-out"></i>
+                        </span>
+                        <span class="navlink">Log Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <h2>Subjects</h2>
+        <div class="subject-cards">
+            <a href="fy/physics.html" class="card"><i class="bx bx-atom"></i> <h3>Physics</h3></a>
+            <a href="fy/chemistry.html" class="card"><i class="bx bx-test-tube"></i> <h3>Chemistry</h3></a>
+            <a href="fy/mathematics.html" class="card"><i class="bx bx-calculator"></i> <h3>Mathematics</h3></a>
+            <a href="fy/english.html" class="card"><i class="bx bx-book-reader"></i> <h3>Communication Skills</h3></a>
+            <a href="fy/cprogramming.html" class="card"><i class="bx bx-laptop"></i> <h3>C Programming</h3></a>
+            <a href="fy/mechanics.html" class="card"><i class="bx bx-cog"></i> <h3>Mechanics</h3></a>
+
+            <!-- New Subjects -->
+            <a href="fy/electrical.html" class="card"><i class="bx bx-plug"></i> <h3>Electrical</h3></a> <!-- Wire icon for Electrical -->
+            <a href="fy/electronics.html" class="card"><i class="bx bx-chip"></i> <h3>Electronics</h3></a> <!-- Capacitor icon for Electronics -->
+            <a href="fy/graphics.html" class="card"><i class="bx bx-ruler"></i> <h3>Graphics</h3></a> <!-- Drafter icon for Graphics -->
+            <a href="fy/lifescience.html" class="card"><i class="bx bx-leaf"></i> <h3>Life Science</h3></a> <!-- Leaf icon for Life Science -->
+            <a href="fy/misc1.html" class="card"><i class="bx bx-folder"></i> <h3>Miscellaneous</h3></a>
+        
+        </div>
+    </div>
+
+
+    <script>
+        // Toggle dropdown for Subjects
+        const subjectsLink = document.getElementById('subjectsLink');
+        const subjectsDropdown = document.getElementById('subjectsDropdown');
+
+        subjectsLink.addEventListener('click', () => {
+            subjectsDropdown.classList.toggle('show'); // Toggle 'show' class
+        });
+
+        // Toggle dark mode
+        document.getElementById("darkLight").addEventListener("click", () => {
+            document.body.classList.toggle("dark");
+        });
+
+        // Search functionality
+        document.getElementById("searchInput").addEventListener("input", function() {
+            const query = this.value.toLowerCase();
+            const subjects = document.querySelectorAll(".subject-cards .card");
+
+            subjects.forEach(subject => {
+                const subjectName = subject.querySelector("h3").textContent.toLowerCase();
+                if (subjectName.includes(query)) {
+                    subject.style.display = "block"; // Show matching subject
+                } else {
+                    subject.style.display = "none"; // Hide non-matching subject
+                }
+            });
+        });
+    </script>
+
+    <style>
+        /* Dropdown Styling */
+        .dropdown {
+            display: none;
+            list-style: none;
+            padding-left: 20px;
+            margin: 5px 0;
+        }
+
+        .dropdown.show {
+            display: block;
+        }
+
+        .dropdown li {
+            margin: 5px 0;
+        }
+
+        .dropdown .nav_link {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333; /* Default color */
+            font-size: 16px;
+        }
+
+        .dropdown .nav_link:hover {
+            background-color: #4070f4;
+            color: white;
+        }
+
+        .dropdown .navlink_icon {
+            margin-right: 10px;
+        }
+
+        .dropdown .navlink {
+            color: #333;
+        }
+
+        /* Style for the whole sidebar links */
+        .nav_link {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333; /* Default color */
+            font-size: 16px;
+        }
+
+        .nav_link:hover {
+            background-color: #4070f4;
+            color: white;
+        }
+
+        .navlink_icon {
+            margin-right: 10px;
+        }
+
+        .navlink {
+            color: #333;
+        }
+
+        /* Heading style */
+        #main-content h2 {
+            color: white; /* Make heading white */
+        }
+
+        /* Dark mode styles */
+        body.dark .nav_link,
+        body.dark .dropdown .nav_link,
+        body.dark .navlink {
+            color: white; /* Change text color to white */
+        }
+
+        /* Optional: Change sidebar background for dark mode */
+        body.dark .sidebar {
+            background-color: #333; 
+        }
+    </style>
+</body>
+</html>

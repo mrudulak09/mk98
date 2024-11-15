@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="profile.css" />
+    <title>User Profile - NotesBuzz</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo_item">
+            <i class="bx bx-menu" id="sidebarOpen"></i>
+            NotesBuzz
+        </div>
+        <div class="search_bar">
+            <input type="text" placeholder="Search" />
+        </div>
+        <div class="navbar_content">
+            <i class="bi bi-grid"></i>
+            <i class='bx bx-sun' id="darkLight"></i>
+            <i class='bx bx-bell'></i>
+            <img src="img/woman.png" alt="" class="profile" />
+        </div>
+    </nav>
+
+    
+     <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="menu_content">
+        <ul class="menu_items">
+            <li class="item">
+                <a href="home.html" class="nav_link submenu_item" id="homeLink">
+                    <span class="navlink_icon">
+                        <i class="bx bx-home-alt"></i>
+                    </span>
+                    <span class="navlink">Home</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="overview.html" class="nav_link submenu_item">
+                    <span class="navlink_icon">
+                        <i class="bx bx-grid-alt"></i>
+                    </span>
+                    <span class="navlink">Overview</span>
+                </a>
+            </li>
+
+            <!-- Subjects Dropdown -->
+            <li class="item">
+                <div class="nav_link submenu_item" id="subjectsLink">
+                    <span class="navlink_icon">
+                        <i class="bx bx-layer"></i>
+                    </span>
+                    <span class="navlink">Subjects</span>
+                    <i class="bx bx-chevron-down arrow-down"></i>
+                </div>
+                <ul class="dropdown" id="subjectsDropdown">
+                    <li>
+                        <a href="firstyear.html" class="nav_link submenu_item">
+                            <span class="navlink_icon">
+                                <i class="bx bx-layer"></i>
+                            </span>
+                            <span class="navlink">First Year</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="secondyear.html" class="nav_link submenu_item">
+                            <span class="navlink_icon">
+                                <i class="bx bx-layer"></i>
+                            </span>
+                            <span class="navlink">Second Year</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="thirdyear.html" class="nav_link submenu_item">
+                            <span class="navlink_icon">
+                                <i class="bx bx-layer"></i>
+                            </span>
+                            <span class="navlink">Third Year</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="fourthyear.html" class="nav_link submenu_item">
+                            <span class="navlink_icon">
+                                <i class="bx bx-layer"></i>
+                            </span>
+                            <span class="navlink">Fourth Year</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="menu_items">
+            <li class="item">
+                <a href="profile.html" class="nav_link">
+                    <span class="navlink_icon">
+                        <i class="bx bxs-magic-wand"></i>
+                    </span>
+                    <span class="navlink">Profile</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="setting.html" class="nav_link">
+                    <span class="navlink_icon">
+                        <i class="bx bx-cog"></i>
+                    </span>
+                    <span class="navlink">Setting</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="logout.html" class="nav_link">
+                    <span class="navlink_icon">
+                        <i class="bx bx-log-out"></i>
+                    </span>
+                    <span class="navlink">Log Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+    <!-- Sidebar Open / Close -->
+    <div class="bottom_content">
+        <div class="bottom expand_sidebar">
+            <span>Expand</span>
+            <i class='bx bx-log-in'></i>
+        </div>
+        <div class="bottom collapse_sidebar">
+            <span>Collapse</span>
+            <i class='bx bx-log-out'></i>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <h2>User Profile</h2>
+        <div class="user-image">
+            <img src="img/woman.png" alt="User Profile" class="profile-image" />
+        </div>
+        <div id="user-settings">
+            <p><strong>Username:</strong> <span id="display-username"></span></p>
+            <p><strong>Email:</strong> <span id="display-email"></span></p>
+            <p><strong>Phone:</strong> <span id="display-phone"></span></p>
+        </div>
+    </div>
+    <script>
+        // Retrieve values from local storage
+        const username = localStorage.getItem('username');
+        const email = localStorage.getItem('email');
+        const phone = localStorage.getItem('phone');
+
+        // Toggle dropdown for Subjects
+        const subjectsLink = document.getElementById('subjectsLink');
+        const subjectsDropdown = document.getElementById('subjectsDropdown');
+
+        subjectsLink.addEventListener('click', () => {
+            subjectsDropdown.classList.toggle('show'); // Toggle 'show' class
+        });
+
+
+        // Display the values on the page
+        document.getElementById('display-username').textContent = username ? username : 'Not set';
+        document.getElementById('display-email').textContent = email ? email : 'Not set';
+        document.getElementById('display-phone').textContent = phone ? phone : 'Not set';
+    </script>
+
+<style>
+    /* Dropdown Styling */
+    .dropdown {
+        display: none;
+        list-style: none;
+        padding-left: 20px;
+        margin: 5px 0;
+    }
+
+    .dropdown.show {
+        display: block;
+    }
+
+    .dropdown li {
+        margin: 5px 0;
+    }
+
+    .dropdown .nav_link {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+    }
+
+    .dropdown .nav_link:hover {
+        background-color: #4070f4;
+        color: white;
+    }
+
+    .dropdown .navlink_icon {
+        margin-right: 10px;
+    }
+
+    .dropdown .navlink {
+        color: #333;
+    }
+
+    /* Style for the whole sidebar links */
+    .nav_link {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+    }
+
+    .nav_link:hover {
+        background-color: #4070f4;
+        color: white;
+    }
+
+    .navlink_icon {
+        margin-right: 10px;
+    }
+
+    .navlink {
+        color: #333;
+    }
+</style>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="overview.css" />
+    <title>Overview - NotesBuzz</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo_item">
+            <i class="bx bx-menu" id="sidebarOpen"></i>
+            NotesBuzz
+        </div>
+        <div class="search_bar">
+            <input type="text" placeholder="Search" />
+        </div>
+        <div class="navbar_content">
+            <i class="bi bi-grid"></i>
+            <i class='bx bx-sun' id="darkLight"></i>
+            <i class='bx bx-bell'></i>
+            <img src="img/woman.png" alt="" class="profile" />
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="menu_content">
+            <ul class="menu_items">
+                <li class="item">
+                    <a href="home.html" class="nav_link submenu_item" id="homeLink">
+                        <span class="navlink_icon">
+                            <i class="bx bx-home-alt"></i>
+                        </span>
+                        <span class="navlink">Home</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="overview.html" class="nav_link submenu_item">
+                        <span class="navlink_icon">
+                            <i class="bx bx-grid-alt"></i>
+                        </span>
+                        <span class="navlink">Overview</span>
+                    </a>
+                </li>
+
+                <!-- Subjects Dropdown -->
+                <li class="item">
+                    <div class="nav_link submenu_item" id="subjectsLink">
+                        <span class="navlink_icon">
+                            <i class="bx bx-layer"></i>
+                        </span>
+                        <span class="navlink">Subjects</span>
+                        <i class="bx bx-chevron-down arrow-down"></i>
+                    </div>
+                    <ul class="dropdown" id="subjectsDropdown">
+                        <li>
+                            <a href="firstyear.html" class="nav_link submenu_item">
+                                <span class="navlink_icon">
+                                    <i class="bx bx-layer"></i>
+                                </span>
+                                <span class="navlink">First Year</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="secondyear.html" class="nav_link submenu_item">
+                                <span class="navlink_icon">
+                                    <i class="bx bx-layer"></i>
+                                </span>
+                                <span class="navlink">Second Year</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="thirdyear.html" class="nav_link submenu_item">
+                                <span class="navlink_icon">
+                                    <i class="bx bx-layer"></i>
+                                </span>
+                                <span class="navlink">Third Year</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="fourthyear.html" class="nav_link submenu_item">
+                                <span class="navlink_icon">
+                                    <i class="bx bx-layer"></i>
+                                </span>
+                                <span class="navlink">Fourth Year</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="menu_items">
+                <li class="item">
+                    <a href="profile.html" class="nav_link">
+                        <span class="navlink_icon">
+                            <i class="bx bxs-magic-wand"></i>
+                        </span>
+                        <span class="navlink">Profile</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="setting.html" class="nav_link">
+                        <span class="navlink_icon">
+                            <i class="bx bx-cog"></i>
+                        </span>
+                        <span class="navlink">Setting</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="logout.html" class="nav_link">
+                        <span class="navlink_icon">
+                            <i class="bx bx-log-out"></i>
+                        </span>
+                        <span class="navlink">Log Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <h1>PDF Summarization Tool</h1>
+        <label class="custom-file-upload">
+            <input type="file" id="pdfInput" accept="application/pdf" />
+            Upload PDF
+        </label>
+        <button onclick="extractAndSummarize()">Summarize PDF</button>
+        <p id="statusMessage"></p>
+        <h2>Extracted Text</h2>
+        <textarea id="extractedText" rows="10" cols="50" readonly></textarea>
+        <h2>Summary</h2>
+        <div id="summaryTextContainer"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script>
+        const pdfjsLib = window['pdfjs-dist/build/pdf'];
+
+        async function extractAndSummarize() {
+            const pdfInput = document.getElementById('pdfInput').files[0];
+            const statusMessage = document.getElementById('statusMessage');
+            const summaryTextContainer = document.getElementById('summaryTextContainer');
+            summaryTextContainer.innerHTML = '';  // Clear previous summaries
+
+            if (!pdfInput) {
+                alert('Please upload a PDF file.');
+                return;
+            }
+
+            try {
+                statusMessage.textContent = "Extracting text from PDF...";
+                const pdfData = await pdfInput.arrayBuffer();
+                const loadingTask = pdfjsLib.getDocument({ data: pdfData });
+
+                loadingTask.promise.then(async function (pdf) {
+                    let extractedText = '';
+
+                    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                        const page = await pdf.getPage(pageNum);
+                        const textContent = await page.getTextContent();
+                        const pageText = textContent.items.map(item => item.str).join(' ');
+                        extractedText += pageText + '\n';
+                    }
+
+                    document.getElementById('extractedText').value = extractedText;
+
+                    statusMessage.textContent = "Generating summary in chunks...";
+                    const chunkSize = 2000;
+                    const textChunks = [];
+                    for (let i = 0; i < extractedText.length; i += chunkSize) {
+                        textChunks.push(extractedText.slice(i, i + chunkSize));
+                    }
+
+                    for (let i = 0; i < textChunks.length; i++) {
+                        const chunk = textChunks[i];
+                        const chunkSummary = await summarizeText(chunk);
+                        const summaryElement = document.createElement("textarea");
+                        summaryElement.rows = 5;
+                        summaryElement.cols = 50;
+                        summaryElement.value = `Summary of chunk ${i + 1}:\n${chunkSummary}`;
+                        summaryTextContainer.appendChild(summaryElement);
+                    }
+
+                    statusMessage.textContent = "Summary generation complete.";
+
+                }).catch(reason => {
+                    console.error('Error loading PDF:', reason);
+                    alert('Error loading PDF: ' + reason);
+                });
+
+            } catch (error) {
+                console.error('Error processing PDF:', error);
+                alert('Error processing PDF: ' + error.message);
+            }
+        }
+
+        async function summarizeText(text) {
+            const apiKey = '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';
+
+            try {
+                const response = await fetch('https://api-inference.huggingface.co/models/facebook/bart-large-cnn', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        inputs: text,
+                        parameters: { max_length: 150, min_length: 50, do_sample: false },
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    console.error('API error:', data.error);
+                    return `Error: ${data.error}`;
+                }
+
+                console.log('API Response:', data);
+                return data[0]?.summary_text || 'No summary available.';
+
+            } catch (error) {
+                console.error('Error summarizing text:', error);
+                return `Error summarizing text: ${error.message}`;
+            }
+        }
+
+        const subjectsLink = document.getElementById('subjectsLink');
+        const subjectsDropdown = document.getElementById('subjectsDropdown');
+
+        subjectsLink?.addEventListener('click', () => {
+            subjectsDropdown?.classList.toggle('show');
+        });
+
+        
+    </script>
+
+    <style>
+        /* Sidebar and dropdown styling */
+        .dropdown {
+            display: none;
+            list-style: none;
+            padding-left: 20px;
+            margin: 5px 0;
+        }
+
+        .dropdown.show {
+            display: block;
+        }
+
+        .dropdown li {
+            margin: 5px 0;
+        }
+
+        .dropdown .nav_link {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .dropdown .nav_link:hover {
+            background-color: #4070f4;
+            color: white;
+        }
+
+        .nav_link {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .nav_link:hover {
+            background-color: #4070f4;
+            color: white;
+        }
+
+        .submenu_item {
+            font-size: 16px;
+        }
+
+        /* Other basic styling */
+        #statusMessage {
+            font-weight: bold;
+            color: #4070f4;
+        }
+    </style>
+</body>
+</html>
